@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de vote | PlockIt</title>
+    <link rel="icon" href="/static/images/favicon.png">
+    <link rel="stylesheet" href="/static/style/ezframework.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    
+</head>
+<body>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><img src="/static/images/favicon.png" class="logo-navbar" alt="PlockIt"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active btn" aria-current="page" id="backButton"><i class="bi bi-arrow-left"></i>Retour au panneau des post-its</a></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Rapport
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item btn" id="sendEmailReportBtn">Envoyer rapport par mail</a></li>
+              <li><a class="dropdown-item btn" id="ddlJsonReportBtn">Télécharger le rapport (.json)</a></li>
+              <li><a class="dropdown-item btn" id="ddlExcelReportBtn">Télécharger le rapport (.xlsx)</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active btn" aria-current="page" href="/credits">Crédits</a>
+          </li>
+      </div>
+    </div>
+  </nav>
+    <div class="container">
+        <div class="separator"></div>
+        <div class="row" id="report">
+            <h1>Rapport de vote</h1>
+        </div>
+    </div>
+</body>
+<script src="/static/js/report.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</html>

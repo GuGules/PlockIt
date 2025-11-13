@@ -1,0 +1,24 @@
+FROM node:22.21.1-alpine
+
+ARG SECURITY_TOKEN
+ARG SECURED_MODE
+ARG INITIAL_IP
+ARG TEMPORARY_IP_ALLOWED
+
+ENV SECURITY_TOKEN=${SECURITY_TOKEN}
+ENV SECURED_MODE=${SECURED_MODE}
+ENV INITIAL_IP=${INITIAL_IP}
+ENV TEMPORARY_IP_ALLOWED=${TEMPORARY_IP_ALLOWED}
+
+#CREATE APP DIRECTORY
+WORKDIR /app
+
+COPY src/ ./src/
+COPY ./package-lock.json ./package-lock.json
+COPY ./package.json ./package.json
+
+RUN mkdir ./src/data;npm ci
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

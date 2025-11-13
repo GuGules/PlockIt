@@ -1,0 +1,25 @@
+name: Déploiement vers registre
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  buildAndPush:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configuration de l’environnement Docker
+      uses: docker/setup-docker-action@v4.3.0
+
+    - name: Construction de l’image docker
+      run: docker build -t plockit .
+
+    - name: Envoi de l’image docker sur le registre public
+      run : |
+        docker tag plockit public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
+        docker push public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
+        docker tag plockit public.registry.jules-pillot.eu/plockit:latest
+        docker push public.registry.jules-pillot.eu/plockit:latest

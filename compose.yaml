@@ -1,0 +1,12 @@
+services:
+  plockit:
+    container_name: plockit
+    image: public.registry.jules-pillot.eu/plockit:latest
+    restart: always
+    ports:
+      - 8092:3000
+    environment:
+      - SECURITY_TOKEN: <change-me>
+      - SECURED_MODE: true
+      - INITIAL_IP: <change-me>
+      - TEMPORARY_IP_ALLOWED: true

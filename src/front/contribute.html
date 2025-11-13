@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlockIt</title>
+    <link rel="icon" href="/static/images/favicon.png">
+    <link rel="stylesheet" href="/static/style/ezframework.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container centered-content mobile-body">
+        <div class="row">
+            <h1><img src="/static/images/favicon.png" alt="logo" class="logo-navbar">Je créé mon postit</h1>
+        </div>
+        <div class="row">
+            <textarea class="form-control textarea" id="contentInput" placeholder="Votre message est ici"></textarea>
+        </div><br>
+        <div class="row">
+            <select class="form-select" id="typeSelector">
+                <option selected>Sélectionner un type de retour</option>
+                <option value="1">Pas Cool</option>
+                <option value="2">A suivre</option>
+                <option value="3">A Améliorer</option>
+                <option value="4">Réussite</option>
+            </select>
+        </div><br>
+        <div class="row">
+            <select class="form-select" id="colorSelector">
+                <option value="white" selected>Blanc</option>
+                <option value="red">Rouge</option>
+                <option value="blue">Bleu</option>
+                <option value="skyblue">Bleu clair</option>
+                <option value="yellow">Jaune</option>
+                <option value="green">Vert</option>
+                <option value="dark">Noir</option>
+                <option value="grey">Gris</option>
+            </select>
+        </div><br>
+        <Button class="btn btn-warning" id="sendBtn">Envoyer post it</Button>
+        <div class="separator"></div>
+        <Button class="btn btn-warning" id="goToVoteBtn">Se rendre aux votes</Button>
+    </div>
+</body>
+<script src="/static/js/contributer.js"></script>
+</html>

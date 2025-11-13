@@ -1,0 +1,6 @@
+projectKey=PlockIt
+serverUrl=http://localhost:9000
+serverVersion=25.10.0.114319
+dashboardUrl=http://localhost:9000/dashboard?id=PlockIt
+ceTaskId=d8891c60-62dc-40cc-9d61-6728c1b4eab6
+ceTaskUrl=http://localhost:9000/api/ce/task?id=d8891c60-62dc-40cc-9d61-6728c1b4eab6
