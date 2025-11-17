@@ -7,6 +7,9 @@ jobs:
   buildAndPush:
     runs-on: ubuntu-latest
     environment: Deployment
+    permissions:
+      contents: read         # peut être utile selon ce que tu fais
+      packages: write         # **c’est ça qui manquait**
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
