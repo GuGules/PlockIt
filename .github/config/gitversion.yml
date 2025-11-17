@@ -1,11 +1,9 @@
 mode: ContinuousDeployment
 next-version: 0.1.0
+
 commit-message-incrementing: Enabled
 commit-message-strategy: MergeMessage
-increment:
-  major:
-    regex: '^(!|.*!:)'   # commits with ! trigger major
-  minor:
-    regex: '^(feat|docs)'  # commits starting with feat or docs
-  patch:
-    regex: '^(fix|i)'   # commits starting with fix or i
+
+major-version-bump-message: "^(!|.*!:)"
+minor-version-bump-message: "^(feat|docs)"
+patch-version-bump-message: "^(fix)"
