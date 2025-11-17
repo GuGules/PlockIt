@@ -31,7 +31,7 @@ jobs:
         docker push public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
         docker tag plockit public.registry.jules-pillot.eu/plockit:latest
         docker push public.registry.jules-pillot.eu/plockit:latest
-        docker tag plockit ghcr.io/GuGules/PlockIt:$(date +'%Y-%m-%d')
+        docker tag plockit ghcr.io/GuGules/plockit:$(date +'%Y-%m-%d')
         docker push ghcr.io/GuGules/PlockIt:$(date +'%Y-%m-%d')
-        docker tag plockit ghcr.io/GuGules/PlockIt:latest
+        docker tag plockit ghcr.io/GuGules/plockit:latest
         docker push ghcr.io/GuGules/PlockIt:latest
