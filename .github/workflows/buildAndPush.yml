@@ -7,7 +7,6 @@ jobs:
   buildAndPush:
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -17,9 +16,45 @@ jobs:
     - name: Construction de l’image docker
       run: docker build -t plockit .
 
-    - name: Envoi de l’image docker sur le registre public
+    - name: Envoi de l’image docker sur le registre public jules-pillot.eu
       run : |
         docker tag plockit public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
         docker push public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
         docker tag plockit public.registry.jules-pillot.eu/plockit:latest
         docker push public.registry.jules-pillot.eu/plockit:latest
+  release:
+    environment: Deployment
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configuration de l’environnement Docker
+      uses: docker/setup-docker-action@v4.3.0
+
+    - name: Connexion au GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ghcr.io/PlockIt
+
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        platforms: linux/amd64,linux/arm64
+        tags: ${{ steps.meta.outputs.tags }}
+
+    - name: Publier une release
+      uses: pipe-cd/actions-gh-release@v2.3.4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
