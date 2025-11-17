@@ -42,9 +42,7 @@ submitBtn.addEventListener('click', () => {
                 })
             }
         })
-    }
-
-    )
+    })
 })
 
 function loadPostIts() {

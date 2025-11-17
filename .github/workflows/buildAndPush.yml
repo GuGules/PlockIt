@@ -26,8 +26,6 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-
-
     - name: Construction de l’image docker
       run: docker build -t plockit .
 
