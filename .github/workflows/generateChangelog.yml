@@ -1,0 +1,26 @@
+name: Génération du tag de version et du changelog
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main 
+
+jobs:
+  generateVersionTag:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4.2.0
+      with:
+        versionSpec: '6.4.x'
+    - name: Determine Version
+      id: version_step # step id used as a reference for output values
+      uses: gittools/actions/gitversion/execute@v4.2.0
+    - name: Push tag to repo
+      run: |
+        echo "Nouvelle Version : ${{ steps.version_step.outputs.majorMinorPatch }}"
+        git tag ${{ steps.version_step.outputs.majorMinorPatch }}
+        git push origin ${{ steps.version_step.outputs.majorMinorPatch }}
