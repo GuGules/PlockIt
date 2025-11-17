@@ -1,22 +1,18 @@
-# GitVersion configuration (semantic versioning a.b.c)
-# Rules:
-# - Major (a) : commit starting with "!" or containing "BREAKING CHANGE"
-# - Minor (b) : "feat" conventional commits
-# - Patch (c) : "fix" and "docs" conventional commits
-
-commit-message-incrementing:
-  enabled: true
-  ignore-merge-messages: true
-  # regex to capture breaking marker (!) or conventional commit type
-  commit-message-regex: '^(?:(?<breaking>!|BREAKING CHANGE)|(?<type>feat|fix|docs|chore|refactor|perf)(?:\(.+\))?:)'
-  major-commit-message-pattern: '^(?:!|BREAKING CHANGE)'
-  minor-commit-message-pattern: '^(?:feat)(?:\(.+\))?:'
-  patch-commit-message-pattern: '^(?:fix|docs)(?:\(.+\))?:'
+# GitVersion config compatible v6
+# - Conventional commits enabled (feat => minor, fix/docs => patch)
+# - Commit message incrementing enabled (recognizes "!" and "BREAKING CHANGE" as breaking)
+commit-message-incrementing: Enabled
 
 conventional-commits:
   enabled: true
 
 mode: ContinuousDeployment
+
+branches:
+  main:
+    regex: ^main$
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
 
 ignore:
   sha: []
