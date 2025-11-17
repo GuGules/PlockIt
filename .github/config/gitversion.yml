@@ -2,7 +2,6 @@ mode: ContinuousDeployment
 next-version: 0.1.0
 
 commit-message-incrementing: Enabled
-commit-message-strategy: MergeMessage
 
 major-version-bump-message: "^(!|.*!:)"
 minor-version-bump-message: "^(feat|docs)"
