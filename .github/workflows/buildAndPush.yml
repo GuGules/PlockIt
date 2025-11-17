@@ -23,6 +23,7 @@ jobs:
         docker tag plockit public.registry.jules-pillot.eu/plockit:latest
         docker push public.registry.jules-pillot.eu/plockit:latest
   release:
+    needs: buildAndPush
     environment: Deployment
     runs-on: ubuntu-latest
     steps:
