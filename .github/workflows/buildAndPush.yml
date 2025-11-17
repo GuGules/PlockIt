@@ -53,8 +53,4 @@ jobs:
         push: true
         platforms: linux/amd64,linux/arm64
         tags: ${{ steps.meta.outputs.tags }}
-
-    - name: Publier une release
-      uses: pipe-cd/actions-gh-release@v2.3.4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        labels: ${{ steps.meta.outputs.labels }}
