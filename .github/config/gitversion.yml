@@ -1,18 +1,11 @@
-# GitVersion config compatible v6
-# - Conventional commits enabled (feat => minor, fix/docs => patch)
-# - Commit message incrementing enabled (recognizes "!" and "BREAKING CHANGE" as breaking)
-commit-message-incrementing: Enabled
-
-conventional-commits:
-  enabled: true
-
 mode: ContinuousDeployment
-
-branches:
-  main:
-    regex: ^main$
-    increment: Patch
-    prevent-increment-of-merged-branch-version: true
-
-ignore:
-  sha: []
+next-version: 0.1.0
+commit-message-incrementing: Enabled
+commit-message-strategy: MergeMessage
+increment:
+  major:
+    regex: '^(!|.*!:)'   # commits with ! trigger major
+  minor:
+    regex: '^(feat|docs)'  # commits starting with feat or docs
+  patch:
+    regex: '^(fix|i)'   # commits starting with fix or i
