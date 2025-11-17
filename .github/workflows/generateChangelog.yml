@@ -50,3 +50,8 @@ jobs:
         env:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
+      - name: Envoi du changelog sur le dépôt git
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: Mise à jour du changelog auto"
+          git push origin main
