@@ -37,7 +37,7 @@
             <div class="col-6 offset-2">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Clé de sécurité : </span>
-                    <input type="text" class="form-control" aria-label="seckey"
+                    <input type="password" class="form-control" aria-label="seckey"
                         aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
@@ -47,9 +47,26 @@
         <div class="row">
             <div class="col-4 offset-1 box">
                 <h1>IP autorisées</h1>
+                <table class="table">
+                    <thead>
+                        <th>Adresse IP</th>
+                        <th>Est temporaire</th>
+                        <th>Identification</th>
+                    </thead>
+                    <tbody id="iptable">
+                    </tbody>
+                </table>
             </div>
             <div class="col-4 offset-1 box">
                 <h1>Demandes d'ip</h1>
+                <table class="table">
+                    <thead>
+                        <th>Adresse IP</th>
+                        <th>Identification</th>
+                    </thead>
+                    <tbody id="tmpiptable">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

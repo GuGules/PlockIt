@@ -8,6 +8,7 @@ const cron = require('./api/services/cron.js')
 const contributeApiModule = require('./api/contribute.js');
 const boardApiModule = require('./api/board.js');
 const settingsApiModule = require('./api/settings.js');
+const healthApiModule = require('./api/health.js')
 
 config.initIPs();
 //Initialisation des routines
@@ -21,6 +22,7 @@ app.set('trust proxy', true);
 app.use('/api/board', boardApiModule);
 app.use('/api/contribute', contributeApiModule);
 app.use('/api/settings', settingsApiModule);
+app.use('/api/health', healthApiModule);
 
 // Serve static files from the "public" directory
 app.use('/static', express.static(__dirname + '/front/public'))
@@ -81,6 +83,17 @@ app.get('/rapport/:id', (req, res) => {
     res.sendFile(__dirname + '/front/rapport.html');
 });
 
+if (config.environment == "dev"){
+    app.get('/errors/:id',(req,res) => {
+        if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip) => { ip.ip == req.ip })) {
+            return res.status(403).sendFile(__dirname + "/front/errors/403.html");
+        }
+        const id = req.params.id;
+        console.log(id,"Dans le endpoint")
+        res.sendFile(__dirname+`/front/errors/${id}.html`)
+    })
+}
+
 app.get('/:id', (req, res) => {
     const id = req.params.id;
     if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip) => { ip.ip == req.ip })) {
@@ -103,4 +116,5 @@ app.use((req, res, next) => {
 
 app.listen(config.port, config.host, () => {
     console.log(`PlockIt app listening on ${config.host}:${config.port}`)
+    console.log(`Environnement de l'application: ${config.environment}`)
 })

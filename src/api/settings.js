@@ -14,10 +14,10 @@ router.post('/enableSecureMode', (req, res) => {
         return res.status(403).json({ error: 'Forbidden' });
     }
 
-    if (config.secured_mode) {
+    if (config.security.secured_mode) {
         res.json({ status: 'Secure mode already enabled' });
     } else {
-        config.secured_mode = true;
+        config.security.secured_mode = true;
         res.json({ status: 'Secure mode enabled' });
     }
 
@@ -29,9 +29,9 @@ router.get('/ip', (req, res) => {
 
 router.post('/disableSecureMode', (req, res) => {
     // Example response
-    if (config.secured_mode && req.headers["x-auth-token"] && req.headers["x-auth-token"] === config.security_token) {
+    if (config.security.secured_mode && req.headers["x-auth-token"] && req.headers["x-auth-token"] === config.security_token) {
         // Enable secure mode logic here
-        config.secured_mode = false;
+        config.security.secured_mode = false;
         res.json({ status: 'Secure mode disabled' });
     } else {
         res.status(403).json({ error: 'Forbidden' });
@@ -51,7 +51,7 @@ router.put('/authorizeIPs', (req, res) => {
     }
 
     // Here you would typically update your configuration or database
-    config.authorized_ips.push(...authorizedIPs);
+    config.security.authorized_ips.push(...authorizedIPs);
 
     res.json({ status: 'Authorized IPs updated', authorized_ips: config.authorized_ips });
 });
@@ -63,7 +63,7 @@ router.get('/authorizedIPs', (req, res) => {
         res.status(403).json({ status: 'Secure mode enabled', message: 'Forbidden' });
     }
 
-    res.status(200).json({ authorized_ips: config.authorized_ips });
+    res.status(200).json({ authorized_ips: config.security.authorized_ips, temporary_authorized_ip: config.security.temporary_authorized_ip });
 });
 
 router.post('/askTmpAuthorization', (req, res) => {

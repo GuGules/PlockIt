@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/createCampaign', (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip) => ip.ip == req.ip)){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip) => ip.ip == req.ip)){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -26,7 +26,7 @@ router.post('/createCampaign', (req, res) => {
 
 router.get('/campaigns/:id/exportRapportJson', async (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ ip.ip == req.ip})){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -70,7 +70,7 @@ router.get('/campaigns/:id/exportRapportJson', async (req, res) => {
 
 router.get('/campaigns/:id/exportRapportExcel', async (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=> {ip.ip == req.ip})){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=> {ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -126,7 +126,7 @@ router.get('/campaigns/:id/exportRapportExcel', async (req, res) => {
 
 router.get('/campaigns/:id/votes', (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -150,7 +150,7 @@ router.get('/campaigns/:id/votes', (req, res) => {
 
 router.post('/campaigns/:id/resetVotes', (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -178,7 +178,7 @@ router.post('/campaigns/:id/resetVotes', (req, res) => {
 
 router.get('/campaigns/:id', (req, res) => {
     
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip)&& !config.security.authorized_ips.some((ip)=>{ip.ip == req.ip})){
+    if (config.security.ssecured_mode && !config.security.authorized_ips.includes(req.ip)&& !config.security.authorized_ips.some((ip)=>{ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
@@ -201,7 +201,7 @@ router.get('/campaigns/:id', (req, res) => {
 });
 
 router.get('/campaigns', (req, res) => {
-    if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
+    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
         return res.status(403).json({ error: 'Forbidden' });
     }
 
