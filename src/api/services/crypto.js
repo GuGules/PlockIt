@@ -1,6 +1,6 @@
-const crypto = require("node:crypto");
+import crypto from "node:crypto";
 
-function hash(string) {
+export function hash(string) {
   const utf8 = new TextEncoder().encode(string);
   return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -11,4 +11,6 @@ function hash(string) {
   });
 }
 
-module.exports = { hash };
+export default {
+  hash
+}

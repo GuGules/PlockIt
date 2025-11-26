@@ -1,5 +1,5 @@
-const config = require('../../config');
-const cron = require('node-cron');
+import config from '../../config.js';
+import cron from 'node-cron';
 
 function initCronJobs() {
     cron.schedule("0 8 * * 4", () => {
@@ -15,6 +15,6 @@ function initCronJobs() {
     });
 }
 
-module.exports = {
+export default {
     initCronJobs
 }

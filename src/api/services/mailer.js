@@ -1,7 +1,7 @@
-const nodemailer = require("nodemailer");
-const config = require("../../config");
+import nodemailer from "nodemailer"
+import config from "../../config.js";
 
-const mailer = nodemailer.createTransport-{
+export const mailer = nodemailer.createTransport-{
     host: config.emailServer.host,
     port: config.emailServer.port,
     secure: config.emailServer.secure,
@@ -11,4 +11,4 @@ const mailer = nodemailer.createTransport-{
     }
 }
 
-module.exports = { mailer };
+export default mailer

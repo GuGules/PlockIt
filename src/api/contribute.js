@@ -1,9 +1,9 @@
-const express = require('express');
-const fs = require('node:fs');
-const { hash } = require('./services/crypto');
+import express from 'express';
+import fs from 'node:fs';
+import { hash } from './services/crypto.js';
 
 //Chargement de la config de l'application
-const config = require('../config.js');
+import config from '../config.js';
 
 const router = express.Router();
 
@@ -79,4 +79,4 @@ router.post('/vote/:id', (req, res) => {
     res.json({ campaign: campaignData });
 });
 
-module.exports = router;
+export default router;
