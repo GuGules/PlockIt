@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ router.get('/live', (req, res)=> {
     res.status(200).json({status: 'OK'})
 })
 
-module.exports = router;
+export default router;

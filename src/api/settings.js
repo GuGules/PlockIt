@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 
 const tmpIpQueue = [];
 
 // Chargement de la config
-const config = require('../config.js');
+import config from '../config.js';
 
 const router = express.Router();
 
@@ -96,4 +96,4 @@ router.post('/tmpAuthorizeIp', (req, res) => {
     }
 })
 
-module.exports = router;
+export default router;

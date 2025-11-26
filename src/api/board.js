@@ -1,9 +1,9 @@
-const express = require('express');
-const fs = require('node:fs');
-const exceljs = require('exceljs');
+import express from 'express';
+import fs from 'node:fs';
+import exceljs from 'exceljs';
 
 // Chargement de la configuration d'application
-const config = require('../config.js');
+import config from '../config.js';
 
 const router = express.Router();
 
@@ -218,4 +218,4 @@ router.get('/campaigns', (req, res) => {
     return res.json({ campaigns: campaigns });
 });
 
-module.exports = router;
+export default router;
