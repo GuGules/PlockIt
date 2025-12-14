@@ -110,6 +110,10 @@ app.get('/:id', (req, res) => {
         return res.status(403).sendFile(__dirname + "/front/errors/403.html");
     }
 
+    if (config.security.demo_mode && id == "demo"){
+        return res.sendFile(__dirname + '/front/index_demo.html');
+    }
+
     const campaigns = fs.readdirSync(__dirname + '/data/')
     if (!(id != "" && campaigns.includes(`campaign_${id}.json`))) {
         return res.status(404).sendFile(__dirname + "/front/errors/404.html");
