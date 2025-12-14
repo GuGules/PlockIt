@@ -25,8 +25,9 @@ let config = {
     }
   },
   security: {
-    secured_mode: process.env.SECURED_MODE || false,
+    secured_mode: process.env.SECURED_MODE == "true" || false,
     authorize_temporary_ip: process.env.TEMPORARY_IP_ALLOWED=="true" || false,
+    demo_mode: process.env.DEMO_MODE == "true" || false,
     temporary_authorized_ip: [], // IP Structure {ip: 'x.x.x.x', expires_at: Date, message: string}
     authorized_ips: ["127.0.0.1","::1"], // localhost par défaut
   }

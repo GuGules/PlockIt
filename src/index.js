@@ -1,8 +1,9 @@
 import express from "express";
 const app = express();
 import config from './config.js'
-import fs from 'node:fs';
+import fs, { cp } from 'node:fs';
 import cron from './api/services/cron.js';
+import demoMode from './api/services/demomode.js'
 import chalk from "chalk";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -24,8 +25,21 @@ cron.initCronJobs();
 app.use(express.json());
 app.set('trust proxy', true);
 
+if (!config.security.demo_mode){
+    app.use('/api/settings', settingsApiModule); // Protected by token authentification
+}else {
+    config.security.secured_mode = false; // Désactivation du mode sécurisé en mode démo
 
-app.use('/api/settings', settingsApiModule); // Protected by token authentification
+    if (!fs.existsSync(`./src/data/campaign_demo.json`)){   
+        // Création de la campagne de démo
+        const demoCampaign = { 
+            campaign: "demo",
+            items: [],
+            votants: []
+        }
+        fs.writeFileSync(`./src/data/campaign_demo.json`, JSON.stringify(demoCampaign));
+    }
+}
 app.use('/api/health', healthApiModule); // Used by kubernetes instances
 
 // Serve static files from the "public" directory
@@ -49,6 +63,9 @@ app.use('/api/contribute', contributeApiModule);
 // Serve front (HTML pages)
 
 app.get('/', (req, res) => {
+    if (config.security.demo_mode){
+        res.redirect('/demo')
+    }
     res.sendFile(__dirname + '/front/index.html');
 });
 
@@ -107,7 +124,34 @@ app.use((req, res, next) => {
     res.status(404).sendFile(__dirname + "/front/errors/404.html")
 })
 
-app.listen(config.port, config.host, () => {
+const server =app.listen(config.port, config.host, () => {
     console.log(`PlockIt app listening on ${config.host}:${config.port}`)
     console.log(`Environnement de l'application: ${config.environment} en mode ${config.security.secured_mode? "sécurisé" : "non sécurisé"}`)
+})
+
+process.on('SIGTERM', ()=>{
+    // Fermeture de l'application par le système
+    console.log(chalk.green(`[${new Date().toISOString()}] SIGTERM received. Shutting down server...`));
+
+    if (config.security.demo_mode){
+        demoMode.deleteDemoFiles();
+        console.log(chalk.green(`[${new Date().toISOString()}] Demo files deleted.`));
+    }
+
+    server.close();
+    console.log(chalk.green(`[${new Date().toISOString()}] Server shotdowned.`));
+})
+
+process.on('SIGINT',()=>{
+    // Fermeture de l'application avec Ctrl+C
+    
+    console.log(chalk.green(`[${new Date().toISOString()}] SIGTERM received. Shutting down server...`));
+
+    if (config.security.demo_mode){
+        demoMode.deleteDemoFiles();
+        console.log(chalk.green(`[${new Date().toISOString()}] Demo files deleted.`));
+    }
+
+    server.close();
+    console.log(chalk.green(`[${new Date().toISOString()}] Server shotdowned.`));
 })
