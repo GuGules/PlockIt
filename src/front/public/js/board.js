@@ -20,6 +20,10 @@ document.getElementById('createCampaignBtn').addEventListener('click', function 
     })
 })
 
+document.getElementById('changeAffichageBtn').addEventListener('click', () => {
+    globalThis.location.href = `/${id}?col=true`;
+});
+
 votesResetBtn.addEventListener('click',()=>{
     resetVotes();
 })
@@ -92,3 +96,4 @@ if (id != "") {
         loadBoard()
     }, 5000)
 }
+

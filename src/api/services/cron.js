@@ -5,8 +5,7 @@ import fs from "fs"
 
 function initCronJobs() {
     cron.schedule("0 8 * * 4", () => {
-        console.log("Running weekly cleanup of temporary authorized IPs");
-        console.log(config)
+        console.log(chalk.yellow(`[${new Date().toISOString()}] - Running weekly cleanup of temporary authorized IPs`));
         const tempIpBefore = config.security.temporary_authorized_ip.length;
         const now = new Date();
         config.security.temporary_authorized_ip = config.security.temporary_authorized_ip.filter((ip) => {

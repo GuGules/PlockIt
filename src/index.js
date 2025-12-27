@@ -63,10 +63,16 @@ app.use('/api/contribute', contributeApiModule);
 // Serve front (HTML pages)
 
 app.get('/', (req, res) => {
+    const col_mode = Boolean(req.query.col);
     if (config.security.demo_mode){
-        res.redirect('/demo')
+        return res.redirect('/demo')
     }
-    res.sendFile(__dirname + '/front/index.html');
+
+    if(col_mode){
+        return res.sendFile(__dirname + '/front/col.html')
+    } else {
+        return res.sendFile(__dirname + '/front/index.html');
+    }
 });
 
 app.get('/err', (req, res) => {
@@ -85,6 +91,10 @@ app.get('/ipmanager', (req, res) => {
     res.sendFile(__dirname + '/front/ipmanager.html');
 })
 
+app.get('/col/:id', (req, res) => {
+    res.sendFile(__dirname + "/front/col.html");
+})
+
 app.get('/vote/:id', (req, res) => {
     res.sendFile(__dirname + '/front/vote.html');
 });
@@ -95,7 +105,7 @@ app.get('/contribute/:id', (req, res) => {
 
 app.get('/rapport/:id', (req, res) => {
     res.sendFile(__dirname + '/front/rapport.html');
-});
+})
 
 if (config.environment == "dev"){
     app.get('/errors/:id',(req,res) => {
@@ -106,6 +116,7 @@ if (config.environment == "dev"){
 
 app.get('/:id', (req, res) => {
     const id = req.params.id;
+    const col_mode = Boolean(req.query.col);
     if (config.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip) => { ip.ip == req.ip })) {
         return res.status(403).sendFile(__dirname + "/front/errors/403.html");
     }
@@ -119,7 +130,11 @@ app.get('/:id', (req, res) => {
         return res.status(404).sendFile(__dirname + "/front/errors/404.html");
     }
 
-    res.sendFile(__dirname + '/front/index.html');
+    if(col_mode){
+        return res.sendFile(__dirname + '/front/col.html')
+    } else {
+        return res.sendFile(__dirname + '/front/index.html');
+    }
 });
 
 // Envoi des erreurs 404
@@ -131,6 +146,7 @@ app.use((req, res, next) => {
 const server =app.listen(config.port, config.host, () => {
     console.log(`PlockIt app listening on ${config.host}:${config.port}`)
     console.log(`Environnement de l'application: ${config.environment} en mode ${config.security.secured_mode? "sécurisé" : "non sécurisé"}`)
+    console.log(`Demo mode: ${config.security.demo_mode? "enabled" : "disabled"}`);
 })
 
 process.on('SIGTERM', ()=>{

@@ -11,10 +11,6 @@ router.post('/:id', (req, res) => {
     const campaignId = req.params.id;
     const itemData = req.body;
 
-    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=>{ip.ip == req.ip})){
-        return res.status(403).json({ error: 'Forbidden' });
-    }
-
     if (!campaignId) {
         return res.status(400).json({ error: 'Invalid campaign ID' });
     }
@@ -47,10 +43,6 @@ router.post('/vote/:id', (req, res) => {
     const campaignId = req.params.id;
     const selectedItems = req.body.selectedItems;
     const session_id = req.body.session_id
-
-    if (config.security.secured_mode && !config.security.authorized_ips.includes(req.ip) && !config.security.temporary_authorized_ip.some((ip)=> ip.ip == req.ip)){
-        return res.status(403).json({ error: 'Forbidden' });
-    }
 
     if (!campaignId) {
         return res.status(400).json({ error: 'Invalid campaign ID' });
