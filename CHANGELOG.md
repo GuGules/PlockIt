@@ -10,3 +10,4 @@
 - Add links to root to test plockit with demo
 - Ajout d'un moyen de lecture par colonnes
 - Improve demo page for seo
+- Amélioration du SEO pour la page de démo de l'application
