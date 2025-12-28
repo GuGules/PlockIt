@@ -3,33 +3,13 @@
 
 ### ⚙️ CI/CD
 
-- Amélioration du changelog
-## [2.5.7] - 2025-12-28
-
-### ⚙️ CI/CD
-
+- Suppression du registre public & correction du worflow de génération de changelog
+- Amélioration du fichier de configuration git-cliff
+- Amélioration du fichier de configuration git-cliff
+- Repositionneùent du workflow sur main
 - Correction avant que ça fiche le bazar
 - Correction du header du changelog
-## [2.5.4] - 2025-12-28
-
-### ⚙️ CI/CD
-
-- Repositionneùent du workflow sur main
-## [2.5.3] - 2025-12-28
-
-### ⚙️ CI/CD
-
-- Amélioration du fichier de configuration git-cliff
-## [2.5.2] - 2025-12-28
-
-### ⚙️ CI/CD
-
-- Amélioration du fichier de configuration git-cliff
-## [2.5.1] - 2025-12-28
-
-### ⚙️ CI/CD
-
-- Suppression du registre public & correction du worflow de génération de changelog
+- Amélioration du changelog
 ## [2.5.0] - 2025-12-27
 
 ### ✨ Fonctionnalités
