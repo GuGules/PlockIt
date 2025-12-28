@@ -4,12 +4,40 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main   
+      - main
+    paths-ignore:
+      - CHANGELOG.md
 
 jobs:
+  generateVersionTag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      tag: ${{ steps.version_step.outputs.majorMinorPatch }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4.2.0
+      with:
+        versionSpec: '6.4.x'
+    - name: Determine Version
+      id: version_step # step id used as a reference for output values
+      uses: gittools/actions/gitversion/execute@v4.2.0
+      with:
+        configFilePath: ./.github/config/gitversion.yml
+    - name: Push tag to repo
+      run: |
+        echo "Nouvelle Version : ${{ steps.version_step.outputs.majorMinorPatch }}"
+        git tag ${{ steps.version_step.outputs.majorMinorPatch }}
+        git push origin ${{ steps.version_step.outputs.majorMinorPatch }}
   buildAndPush:
     runs-on: ubuntu-latest
     environment: Deployment
+    needs: generateVersionTag
     permissions:
       contents: read         # peut être utile selon ce que tu fais
       packages: write         # **c’est ça qui manquait**
@@ -29,13 +57,9 @@ jobs:
     - name: Construction de l’image docker
       run: docker build -t plockit .
 
-    - name: Envoi de l’image docker sur le registre public jules-pillot.eu
+    - name: Envoi de l’image docker sur le registre GCR
       run : |
-        docker tag plockit public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
-        docker push public.registry.jules-pillot.eu/plockit:$(date +'%Y-%m-%d')
-        docker tag plockit public.registry.jules-pillot.eu/plockit:latest
-        docker push public.registry.jules-pillot.eu/plockit:latest
-        docker tag plockit ghcr.io/gugules/plockit:$(date +'%Y-%m-%d')
-        docker push ghcr.io/gugules/plockit:$(date +'%Y-%m-%d')
+        docker tag plockit ghcr.io/gugules/plockit:${{ needs.generateVersionTag.outputs.tag }}
+        docker push ghcr.io/gugules/plockit:${{ needs.generateVersionTag.outputs.tag }}
         docker tag plockit ghcr.io/gugules/plockit:latest
         docker push ghcr.io/gugules/plockit:latest
