@@ -1,3 +1,12 @@
+## [2.5.5] - 2025-12-28
+
+### Chore
+
+- Mise à jour du changelog auto
+
+### Ci
+
+- Correction avant que ça fiche le bazar
 ## [2.5.4] - 2025-12-28
 
 ### Ci
