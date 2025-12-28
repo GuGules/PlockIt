@@ -29,11 +29,7 @@ jobs:
       uses: gittools/actions/gitversion/execute@v4.2.0
       with:
         configFilePath: ./.github/config/gitversion.yml
-    - name: Push tag to repo
-      run: |
-        echo "Nouvelle Version : ${{ steps.version_step.outputs.majorMinorPatch }}"
-        git tag ${{ steps.version_step.outputs.majorMinorPatch }}
-        git push origin ${{ steps.version_step.outputs.majorMinorPatch }}
+
   buildAndPush:
     runs-on: ubuntu-latest
     environment: Deployment
