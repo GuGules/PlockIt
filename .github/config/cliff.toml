@@ -28,5 +28,5 @@ link_parsers = [
 recurse_submodules = false
 
 [changelog]
-headre = "Plockit - Changelog"
+header = "Plockit - Changelog"
 output = "CHANGELOG.md"
