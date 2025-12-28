@@ -11,6 +11,8 @@ commit_parsers = [
     { message = "^refactor", group = "Refactor"},
     { message = "^style", group = "Styling"},
     { message = "^test", group = "Testing"},
+    { message = "^ci", group = "CI/CD"},
+    { message = "^chore", skip = true},
 ]
 protect_breaking_commits = true
 filter_commits = false
@@ -24,5 +26,7 @@ link_parsers = [
     { pattern = "RFC(\\d+)", text = "ietf-rfc$1", href = "https://datatracker.ietf.org/doc/html/rfc$1"},
 ]
 recurse_submodules = false
+
 [changelog]
+headre = "Plockit - Changelog"
 output = "CHANGELOG.md"
