@@ -1,3 +1,9 @@
+Plockit - Changelog
+## [2.5.7] - 2025-12-28
+
+### CI/CD
+
+- Correction du header du changelog
 ## [2.5.5] - 2025-12-28
 
 ### CI/CD
