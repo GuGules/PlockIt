@@ -4,14 +4,14 @@ filter_unconventional = true
 require_conventional = false
 split_commits = false
 commit_parsers = [
-    { message = "^feat", group = "Features"},
-    { message = "^fix", group = "Bug Fixes"},
-    { message = "^doc", group = "Documentation"},
-    { message = "^perf", group = "Performance"},
-    { message = "^refactor", group = "Refactor"},
-    { message = "^style", group = "Styling"},
-    { message = "^test", group = "Testing"},
-    { message = "^ci", group = "CI/CD"},
+    { message = "^feat", group = "✨ Fonctionnalités"},
+    { message = "^fix", group = "🐛 Corrections de bugs"},
+    { message = "^doc", group = "📚 Documentation"},
+    { message = "^perf", group = "⚡ Performance"},
+    { message = "^refactor", group = "♻️ Refactor"},
+    { message = "^style", group = "🎨 Styling"},
+    { message = "^test", group = "🧪 Testing"},
+    { message = "^ci", group = "⚙️ CI/CD"},
     { message = "^chore", skip = true},
 ]
 protect_breaking_commits = true
@@ -28,5 +28,5 @@ link_parsers = [
 recurse_submodules = false
 
 [changelog]
-header = "Plockit - Changelog"
+header = "# Plockit - Changelog"
 output = "CHANGELOG.md"
