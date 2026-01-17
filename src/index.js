@@ -171,7 +171,7 @@ process.on('SIGINT',()=>{
         demoMode.deleteDemoFiles();
         console.log(chalk.green(`[${new Date().toISOString()}] Demo files deleted.`));
     }
-
+    
     server.close();
     console.log(chalk.green(`[${new Date().toISOString()}] Server shotdowned.`));
 })
