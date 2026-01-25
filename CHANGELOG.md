@@ -1,4 +1,9 @@
 # Plockit - Changelog
+## [2.6.1] - 2026-01-25
+
+### 🐛 Corrections de bugs
+
+- Fix sent post it display and add postit type
 ## [2.6.0] - 2026-01-25
 
 ### ✨ Fonctionnalités
