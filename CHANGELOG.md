@@ -1,14 +1,13 @@
 # Plockit - Changelog
 ## [2.6.1] - 2026-01-25
 
-### 🐛 Corrections de bugs
-
-- Fix sent post it display and add postit type
-## [2.6.0] - 2026-01-25
-
 ### ✨ Fonctionnalités
 
 - Add request ips in logs + fix display in columns mode + show sent post it into contribute page
+
+### 🐛 Corrections de bugs
+
+- Fix sent post it display and add postit type
 ## [2.5.8] - 2025-12-28
 
 ### ⚙️ CI/CD
