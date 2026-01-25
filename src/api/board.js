@@ -177,8 +177,8 @@ router.get('/campaigns/:id', (req, res) => {
         const cols = [
             { "name": '<i class="bi bi-file-excel">&nbsp;</i>Pas Cool' ,"items": json.items.filter((item) => item.type == 1)},
             { "name": '<i class="bi bi-eye">&nbsp;</i>A suivre', "items": json.items.filter((item) => item.type == 2)},
-            { "name": "A Ameliorer", "items": json.items.filter((item) => item.type == 3)},
-            { "name": "Reussites", "items": json.items.filter((item) => item.type == 4)}
+            { "name": '<i class="bi bi-graph-up-arrow">&nbsp;</i>A améliorer', "items": json.items.filter((item) => item.type == 3)},
+            { "name": '<i class="bi bi-trophy">&nbsp;</i>Réussites', "items": json.items.filter((item) => item.type == 4)}
         ];
         return res.json({
             campaign: json.campaign,

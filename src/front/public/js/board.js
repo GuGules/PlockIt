@@ -58,7 +58,6 @@ function loadBoard() {
     data.then((campaign) => {
         campaign.items.forEach(item => {
             if (!onBoard.includes(item.id)) {
-
                 let postIt = `<div class="row card card-spacing ${colors[item.color]} col-10 offset-1"><div class="card-body postit-content">${item.content}</div></div><div class="separator">`
 
                 switch (item.type) {
