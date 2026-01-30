@@ -84,7 +84,6 @@ router.get('/campaigns/:id/exportRapportExcel', async (req, res) => {
 
     const excelWorkSheet = excelWorkbook.addWorksheet(`${campaignId}`);
     excelWorkSheet.columns = [
-        { header: 'Id', key: 'id', width: 5 },
         { header: 'Message', key: 'msg', width: 50 },
         { header: 'Types de messages', key: 'type', width: 20 },
         { header: 'Nombre de vote', key: 'nbVotes', width: 17 }
@@ -93,12 +92,10 @@ router.get('/campaigns/:id/exportRapportExcel', async (req, res) => {
     // configuration saut auto ligne
     excelWorkSheet.getColumn('msg').alignment = { wrapText: true }
 
-    let id = 0
     const types = ["Pas Cool", "A suivre", "A améliorer", "Réussites"]
 
     items.filter((item) => item.votes != 0).forEach(item => {
         excelWorkSheet.addRow({
-            id: id,
             msg: item.content,
             type: types[item.type - 1],
             nbVotes: item.votes
