@@ -1,4 +1,10 @@
 # Plockit - Changelog
+## [2.6.3] - 2026-01-30
+
+### 🐛 Corrections de bugs
+
+- Suppression de la colonne Id dans le rapport Excel
+- Correction orthographique sur la page de contribution
 ## [2.6.1] - 2026-01-25
 
 ### ✨ Fonctionnalités
