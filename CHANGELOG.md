@@ -1,4 +1,9 @@
 # Plockit - Changelog
+## [2.7.0] - 2026-03-23
+
+### ✨ Fonctionnalités
+
+- Start ip manager development
 ## [2.6.3] - 2026-01-30
 
 ### 🐛 Corrections de bugs
