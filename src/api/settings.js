@@ -63,15 +63,16 @@ router.get('/authorizedIPs', (req, res) => {
         res.status(403).json({ status: 'Secure mode enabled', message: 'Forbidden' });
     }
 
-    res.status(200).json({ authorized_ips: config.security.authorized_ips, temporary_authorized_ip: config.security.temporary_authorized_ip });
+    res.status(200).json([...config.security.authorized_ips.map((item) => { return{ip: item,temp: false}}),...config.security.temporary_authorized_ip.map((item) => { return{ip: item,temp: true}})]);
 });
 
 router.post('/askTmpAuthorization', (req, res) => {
 
     const ip = req.ip;
+    const message = req.message;
 
     if (ip){
-        tmpIpQueue.push(req.ip);
+        tmpIpQueue.push({ip:req.ip,identification : message});
 
         res.status(200).json({ message: "Submitted", total_ip: config.security.temporary_authorized_ip.length })
     } else {
@@ -86,6 +87,23 @@ router.post('/tmpAuthorizeIp', (req, res) => {
     }
 
     const ip = req.body.ip;
+
+    if (ip && config.security.authorize_temporary_ip){
+        const expires_at = new Date();
+        expires_at.setDate(expires_at.getDate()+7)
+        config.security.authorize_temporary_ip.push({ip : ip, expires_at: expires_at})
+    } else {
+        res.status(401).json({error:"Can't authorize ip"})
+    }
+})
+
+router.post('/tmpAuthorizeIp/:id', (req, res) => {
+    if (!req.headers["x-auth-token"] || req.headers["x-auth-token"] !== config.security_token) {
+        // Enable secure mode logic here
+        res.status(403).json({ status: 'Secure mode enabled', error: "Access Denied" });
+    }
+
+    const ip = req.params.ip;
 
     if (ip && config.security.authorize_temporary_ip){
         const expires_at = new Date();

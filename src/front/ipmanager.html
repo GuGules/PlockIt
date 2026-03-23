@@ -37,11 +37,11 @@
             <div class="col-6 offset-2">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Clé de sécurité : </span>
-                    <input type="password" class="form-control" aria-label="seckey"
+                    <input type="password" id="passwordInput" class="form-control" aria-label="seckey"
                         aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
-            <button type="button" class="btn btn-success col-1">Valider clé</button>
+            <button type="button" onclick="loadIpManager()" class="btn btn-success col-1">Charger IP Manager</button>
         </div>
         <br>
         <div class="row">
@@ -51,18 +51,18 @@
                     <thead>
                         <th>Adresse IP</th>
                         <th>Est temporaire</th>
-                        <th>Identification</th>
                     </thead>
                     <tbody id="iptable">
                     </tbody>
                 </table>
             </div>
             <div class="col-4 offset-1 box">
-                <h1>Demandes d'ip</h1>
+                <h1>Demandes d'accréditation</h1>
                 <table class="table">
                     <thead>
                         <th>Adresse IP</th>
                         <th>Identification</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody id="tmpiptable">
                     </tbody>
