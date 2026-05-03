@@ -1,4 +1,9 @@
 # Plockit - Changelog
+## [2.8.0] - 2026-05-03
+
+### ✨ Fonctionnalités
+
+- Ajout du endpoint pour autoriser l'accès à l'application
 ## [2.7.0] - 2026-03-23
 
 ### ✨ Fonctionnalités
