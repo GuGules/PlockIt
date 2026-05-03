@@ -1,5 +1,5 @@
 let errorBtn = document.getElementById('degageBtn')
-let goBoardBtn = document.getElementById('goBoardBtn')
+let askAccessBtn = document.getElementById('askAccessBtn')
 
 if (errorBtn){
     errorBtn.addEventListener('click',()=>{
@@ -7,8 +7,22 @@ if (errorBtn){
     });
 }
 
-if (goBoardBtn){
-    goBoardBtn.addEventListener('click',()=>{
-        globalThis.location.pathname="/";
+if (askAccessBtn){
+    askAccessBtn.addEventListener('click', async ()=>{
+        const message = prompt('Entrez un message permettant d\'identifier la demande :')
+        if (message !== null){
+            const res = await fetch(
+                '/api/settings/askTmpAuthorization',
+                {
+                    method:'POST',
+                    body: JSON.stringify({
+                        message: message
+                    }),
+                    headers:{
+                        "Content-Type": 'application/json'
+                    }
+                }
+            )
+        }
     })
 }
