@@ -63,7 +63,7 @@ router.get('/authorizedIPs', (req, res) => {
         res.status(403).json({ status: 'Secure mode enabled', message: 'Forbidden' });
     }
 
-    res.status(200).json([...config.security.authorized_ips.map((item) => { return{ip: item,temp: false}}),...config.security.temporary_authorized_ip.map((item) => { return{ip: item,temp: true}})]);
+    res.status(200).json([...config.security.authorized_ips.map((item) => { return{ip: item,temp: false, identification: null}}),...config.security.temporary_authorized_ip.map((item) => { return{ip: item.ip,temp: true, identification: item.message}})]);
 });
 
 router.post('/askTmpAuthorization', (req, res) => {
@@ -99,6 +99,26 @@ router.post('/tmpAuthorizationApprove', (req, res) => {
         }
     } else {
         res.status(400)
+    }
+})
+
+router.post('/tmpAuthorizationDecline', (req, res) => {
+    if (!req.headers["x-auth-token"] || req.headers["x-auth-token"] !== config.security_token) {
+        // Enable secure mode logic here
+        res.status(403).json({ status: 'Secure mode enabled', error: "Access Denied" });
+    }
+
+    const ip = req.body.ip;
+
+    if (ip){
+        if (tmpIpQueue.includes(item => item.ip == ip)){
+            tmpIpQueue = tmpIpQueue.filter(item => item.ip != ip);
+            res.status(204);
+        } else {
+            res.status(404);
+        }
+    } else {
+        res.status(400);
     }
 })
 
