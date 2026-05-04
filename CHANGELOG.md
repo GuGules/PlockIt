@@ -1,4 +1,9 @@
 # Plockit - Changelog
+## [2.9.0] - 2026-05-04
+
+### ✨ Fonctionnalités
+
+- Ajout de l'accréditationd des accès dans IPManager
 ## [2.8.0] - 2026-05-03
 
 ### ✨ Fonctionnalités
